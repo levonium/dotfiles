@@ -28,9 +28,9 @@ use('wbthomason/packer.nvim')
 
 -- Colorscheme
 use({
-    'jessarcher/onedark.nvim',
+    'folke/tokyonight.nvim',
     config = function()
-        vim.cmd('colorscheme onedark')
+        vim.cmd('colorscheme tokyonight')
 
         vim.api.nvim_set_hl(0,  'FloatBorder', {
             fg = vim.api.nvim_get_hl_by_name('NormalFloat', true).background,
@@ -164,7 +164,7 @@ use({
 use({
     'akinsho/bufferline.nvim',
     requires = 'kyazdani42/nvim-web-devicons',
-    after = 'onedark.nvim',
+    after = 'tokyonight.nvim',
     config = function()
         require('user/plugins/bufferline')
     end
@@ -197,6 +197,50 @@ use({
         vim.keymap.set('n', 'gp', ':Gitsigns preview_hunk<CR>')
         vim.keymap.set('n', 'gb', ':Gitsigns blame_line<CR>')
     end
+})
+
+use({
+    'tpope/vim-fugitive',
+    requires = 'tpope/vim-rhubarb'
+})
+
+-- Floating terminal.
+use({
+    'voldikss/vim-floaterm',
+    config = function()
+        vim.g.floaterm_wintype = 'split'
+        vim.g.floaterm_height = 0.4
+        vim.keymap.set('n', '<F1>', ':FloatermToggle<CR>')
+        vim.keymap.set('t', '<F1>', '<C-\\><C-n>:FloatermToggle<CR>')
+    end
+})
+
+-- LSP Config
+use {
+  "neovim/nvim-lspconfig",
+  requires = {
+    { "williamboman/mason.nvim" },
+    { "williamboman/mason-lspconfig.nvim" },
+  },
+  config = function()
+      require('user/plugins/lspconfig')
+  end,
+}
+
+
+-- Tree Sitter
+use({
+    'nvim-treesitter/nvim-treesitter',
+    run = function()
+        require('nvim-treesitter.install').update({ with_sync = true })
+    end,
+    rewuires = {
+        'JooepAlviste/nvim-ts-context-commentstring',
+        'nvim-treesitter/nvim-treesitter-textobjects',
+    },
+    config = function()
+        require('user/plugins/treesitter')
+    end,
 })
 
 -- Automatically set up your configuration after cloning packer.nvim

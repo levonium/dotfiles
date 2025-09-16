@@ -32,6 +32,8 @@ vim.opt.splitright = true
 vim.opt.scrolloff = 6
 vim.opt.sidescrolloff = 6
 
+vim.opt.signcolumn = 'yes:1'
+
 vim.opt.clipboard = 'unnamedplus' -- use system clipboard
 
 vim.opt.confirm = true -- ask for confirmation instead of an error

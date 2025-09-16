@@ -24,8 +24,14 @@ require('lualine').setup({
                 'diff',
                 symbols = { added = ' ', modified = ' ', removed = ' ' },
             },
-            function ()
-                return '󰅭 ' .. vim.pesc(tostring(#vim.tbl_keys(vim.lsp.buf_get_clients())) or '')
+            function()
+                local bufnr = vim.api.nvim_get_current_buf()
+                local ok, clients = pcall(vim.lsp.get_clients, { bufnr = bufnr })
+                if not ok then
+                    clients = vim.lsp.get_active_clients({ bufnr = bufnr })
+                end
+                local count = (type(clients) == "table") and #clients or 0
+                return "󰅭 " .. tostring(count)
             end,
             { 'diagnostics', sources = { 'nvim_diagnostic' } },
         },
@@ -40,7 +46,9 @@ require('lualine').setup({
             },
         },
         lualine_y = {
-            '(vim.bo.expandtab and "␠ " or "⇥ ") .. vim.bo.shiftwidth',
+            function()
+                return (vim.bo.expandtab and "␠ " or "⇥ ") .. vim.bo.shiftwidth
+            end,
         },
         lualine_z = {
             'searchcount',
