@@ -15,9 +15,8 @@ require("mason-lspconfig").setup({
   automatic_enable = false,
 })
 
--- Load lspconfig
-local lspconfig = require("lspconfig")
-local util = require("lspconfig.util")
+-- Use the new vim.lsp.enable() API for Neovim 0.11+
+-- The old require('lspconfig') framework is deprecated
 
 -- Capabilities (enhanced if nvim-cmp is installed)
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -26,8 +25,8 @@ if ok_cmp then
   capabilities = cmp_lsp.default_capabilities(capabilities)
 end
 
--- Lua language server
-lspconfig.lua_ls.setup({
+-- Enable LSP servers using the new API
+vim.lsp.enable("lua_ls", {
   capabilities = capabilities,
   settings = {
     Lua = {
@@ -38,21 +37,13 @@ lspconfig.lua_ls.setup({
   },
 })
 
--- JavaScript / TypeScript
-lspconfig.ts_ls.setup({
+vim.lsp.enable("ts_ls", {
   capabilities = capabilities,
-  root_dir = function(fname)
-    return util.root_pattern("tsconfig.json", "jsconfig.json", "package.json", ".git")(fname)
-        or util.path.dirname(fname)
-  end,
   single_file_support = true,
 })
 
--- CSS
-lspconfig.cssls.setup({ capabilities = capabilities })
+vim.lsp.enable("cssls", { capabilities = capabilities })
 
--- PHP
-lspconfig.phpactor.setup({ capabilities = capabilities })
+vim.lsp.enable("phpactor", { capabilities = capabilities })
 
--- Bash
-lspconfig.bashls.setup({ capabilities = capabilities })
+vim.lsp.enable("bashls", { capabilities = capabilities })
