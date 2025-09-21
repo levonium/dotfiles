@@ -215,6 +215,30 @@ use({
     end
 })
 
+-- Formatting on save
+use({
+  'stevearc/conform.nvim',
+  config = function()
+    require('user/plugins/conform')
+  end
+})
+
+-- Completion
+use({
+  'hrsh7th/nvim-cmp',
+  requires = {
+    'hrsh7th/cmp-nvim-lsp',
+    'hrsh7th/cmp-buffer',
+    'hrsh7th/cmp-path',
+    'saadparwaiz1/cmp_luasnip',
+    'L3MON4D3/LuaSnip',
+    'rafamadriz/friendly-snippets',
+  },
+  config = function()
+    require('user/plugins/cmp')
+  end
+})
+
 -- LSP Config
 use {
   "neovim/nvim-lspconfig",

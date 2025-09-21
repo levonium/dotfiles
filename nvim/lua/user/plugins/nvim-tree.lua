@@ -6,7 +6,7 @@ require('nvim-tree').setup({
         group_empty = true,
         icons = {
             show = {
-                folder_arrow = false,
+                folder_arrow = true,
             },
         },
         indent_markers = {

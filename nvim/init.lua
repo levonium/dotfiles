@@ -7,6 +7,3 @@ end
 require('user/plugins')
 require('user/options')
 require('user/keymaps')
-
-vim.lsp.enable({ "lua_ls", "ts_ls", "cssls", "phpactor", "bashls" })
-
