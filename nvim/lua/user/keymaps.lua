@@ -51,8 +51,8 @@ vim.keymap.set('n', 'q:', ':q<CR>')
 -- vim.keymap.set('n', '<C-Right>', ':vertical resize +2<CR>')
 
 -- Move text up and down
-vim.keymap.set('i', '<A-Down>', '<Esc>:move .+1<CR>==gi')
-vim.keymap.set('i', '<A-Up>', '<Esc>:move .-2<CR>==gi')
+vim.keymap.set('i', '<A-Down>', '<Esc>:move .+1<CR>=')
+vim.keymap.set('i', '<A-Up>', '<Esc>:move .-2<CR>=')
 vim.keymap.set('n', '<A-Down>', ':move .+1<CR>==')
 vim.keymap.set('n', '<A-Up>', ':move .-2<CR>==')
 vim.keymap.set('v', '<A-Down>', ":move '>+1<CR>gv=gv")

@@ -1,19 +1,19 @@
 local ensure_packer = function()
-  local fn = vim.fn
-  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-  if fn.empty(fn.glob(install_path)) > 0 then
-    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
-    vim.cmd [[packadd packer.nvim]]
-    return true
-  end
-  return false
+    local fn = vim.fn
+    local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
+    if fn.empty(fn.glob(install_path)) > 0 then
+        fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path })
+        vim.cmd [[packadd packer.nvim]]
+        return true
+    end
+    return false
 end
 
 local packer_bootstrap = ensure_packer()
 
 require('packer').reset()
 require('packer').init({
-    compile_path = vim.fn.stdpath('data')..'/site/plugin/packer_compiled.lua',
+    compile_path = vim.fn.stdpath('data') .. '/site/plugin/packer_compiled.lua',
     display = {
         open_fn = function()
             return require('packer.util').float({ border = 'solid' })
@@ -30,22 +30,58 @@ use('wbthomason/packer.nvim')
 use({
     'folke/tokyonight.nvim',
     config = function()
+        require('tokyonight').setup({
+            transparent = true,
+            styles = {
+                sidebars = 'transparent',
+                floats = 'transparent',
+            },
+        })
+
         vim.cmd('colorscheme tokyonight')
 
-        vim.api.nvim_set_hl(0,  'FloatBorder', {
-            fg = vim.api.nvim_get_hl_by_name('NormalFloat', true).background,
-            bg = vim.api.nvim_get_hl_by_name('NormalFloat', true).background,
-        })
+        local function get_hl(name)
+            local ok, hl = pcall(vim.api.nvim_get_hl_by_name, name, true)
+            if not ok then
+                return {}
+            end
+            return hl
+        end
+
+        local function make_transparent(group)
+            vim.api.nvim_set_hl(0, group, { bg = 'NONE' })
+        end
+
+        local normal = get_hl('Normal')
+        local normal_float = get_hl('NormalFloat')
+        local float_border = get_hl('FloatBorder')
+
+        make_transparent('Normal')
+        make_transparent('NormalFloat')
+        make_transparent('SignColumn')
+        make_transparent('EndOfBuffer')
+        local float_border_fg = float_border.foreground or normal_float.foreground or normal.foreground
+        local float_border_opts = { bg = 'NONE' }
+
+        if float_border_fg then
+            float_border_opts.fg = float_border_fg
+        end
+
+        vim.api.nvim_set_hl(0, 'FloatBorder', float_border_opts)
 
         vim.api.nvim_set_hl(0, 'NvimTreeIndentMarker', { fg = '#30323E' })
 
-        vim.api.nvim_set_hl(0, 'StatusLineNonText', {
-            fg = vim.api.nvim_get_hl_by_name('NonText', true).foreground,
-            bg = vim.api.nvim_get_hl_by_name('StatusLine', true).background,
-        })
+        local non_text = get_hl('NonText')
+        local status_line = get_hl('StatusLine')
+
+        if non_text.foreground and status_line.background then
+            vim.api.nvim_set_hl(0, 'StatusLineNonText', {
+                fg = non_text.foreground,
+                bg = status_line.background,
+            })
+        end
     end
 })
-
 
 -- Commenting support
 use('tpope/vim-commentary')
@@ -130,16 +166,16 @@ use({
 
 -- Fuzzy finder
 use({
-   'nvim-telescope/telescope.nvim',
-   requires = {
-       'nvim-lua/plenary.nvim',
-       'kyazdani42/nvim-web-devicons',
-       'nvim-telescope/telescope-live-grep-args.nvim',
-       { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
-   },
-   config = function()
-       require('user/plugins/telescope')
-   end
+    'nvim-telescope/telescope.nvim',
+    requires = {
+        'nvim-lua/plenary.nvim',
+        'kyazdani42/nvim-web-devicons',
+        'nvim-telescope/telescope-live-grep-args.nvim',
+        { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
+    },
+    config = function()
+        require('user/plugins/telescope')
+    end
 })
 
 -- File Tree sidebar
@@ -210,45 +246,45 @@ use({
     config = function()
         vim.g.floaterm_wintype = 'split'
         vim.g.floaterm_height = 0.4
-        vim.keymap.set('n', '<F1>', ':FloatermToggle<CR>')
+        vim.keymap.set('n', '<leader><leader>', ':FloatermToggle<CR>')
         vim.keymap.set('t', '<F1>', '<C-\\><C-n>:FloatermToggle<CR>')
     end
 })
 
 -- Formatting on save
 use({
-  'stevearc/conform.nvim',
-  config = function()
-    require('user/plugins/conform')
-  end
+    'stevearc/conform.nvim',
+    config = function()
+        require('user/plugins/conform')
+    end
 })
 
 -- Completion
 use({
-  'hrsh7th/nvim-cmp',
-  requires = {
-    'hrsh7th/cmp-nvim-lsp',
-    'hrsh7th/cmp-buffer',
-    'hrsh7th/cmp-path',
-    'saadparwaiz1/cmp_luasnip',
-    'L3MON4D3/LuaSnip',
-    'rafamadriz/friendly-snippets',
-  },
-  config = function()
-    require('user/plugins/cmp')
-  end
+    'hrsh7th/nvim-cmp',
+    requires = {
+        'hrsh7th/cmp-nvim-lsp',
+        'hrsh7th/cmp-buffer',
+        'hrsh7th/cmp-path',
+        'saadparwaiz1/cmp_luasnip',
+        'L3MON4D3/LuaSnip',
+        'rafamadriz/friendly-snippets',
+    },
+    config = function()
+        require('user/plugins/cmp')
+    end
 })
 
 -- LSP Config
 use {
-  "neovim/nvim-lspconfig",
-  requires = {
-    { "williamboman/mason.nvim" },
-    { "williamboman/mason-lspconfig.nvim" },
-  },
-  config = function()
-      require('user/plugins/lspconfig')
-  end,
+    "neovim/nvim-lspconfig",
+    requires = {
+        { "williamboman/mason.nvim" },
+        { "williamboman/mason-lspconfig.nvim" },
+    },
+    config = function()
+        require('user/plugins/lspconfig')
+    end,
 }
 
 
