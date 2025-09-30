@@ -197,14 +197,14 @@ use({
 })
 
 -- Buffer tabs
-use({
-    'akinsho/bufferline.nvim',
-    requires = 'kyazdani42/nvim-web-devicons',
-    after = 'tokyonight.nvim',
-    config = function()
-        require('user/plugins/bufferline')
-    end
-})
+-- use({
+--     'akinsho/bufferline.nvim',
+--     requires = 'kyazdani42/nvim-web-devicons',
+--     after = 'tokyonight.nvim',
+--     config = function()
+--         require('user/plugins/bufferline')
+--     end
+-- })
 
 -- Display indentation lines
 -- use({

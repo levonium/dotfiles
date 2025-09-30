@@ -9,8 +9,9 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 vim.keymap.set('n', '<leader>Q', ':bufdo bdelete<CR>')
 
 -- Diagnostics.
--- vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [d]iagnostic' })
--- vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [d]iagnostic' })
+vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float, { desc = "Line diagnostics" })
+vim.keymap.set('n', '[d', function() vim.diagnostic.jump({ count = -1 }) end, { desc = 'Go to previous [d]iagnostic' })
+vim.keymap.set('n', ']d', function() vim.diagnostic.jump({ count = 1 }) end, { desc = 'Go to next [d]iagnostic' })
 
 -- Allow gf to open non-existent files.
 -- vim.keymap.set('', 'gf', ':edit <cfile><CR>')
