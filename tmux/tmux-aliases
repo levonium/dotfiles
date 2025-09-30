@@ -1,0 +1,5 @@
+alias tml="tmux ls"
+alias tms="~/.tmux/tmuxstart.sh"
+alias tmsave="~/.tmux/tmuxsave.sh"
+alias tmrestore="~/.tmux/tmuxrestore.sh"
+
