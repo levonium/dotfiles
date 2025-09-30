@@ -32,7 +32,7 @@ conform.setup({
     json = { 'prettierd', 'prettier' },
     jsonc = { 'prettierd', 'prettier' },
     yaml = { 'prettierd', 'prettier' },
-    markdown = { 'prettierd', 'prettier' },
+    markdown = { 'prettierd', 'prettier', 'mdformat' },
     lua = { 'stylua' },
     php = { 'pint', 'php_cs_fixer' },
     sh = { 'shfmt' },
@@ -43,6 +43,13 @@ conform.setup({
     -- Prefer project-local installs
     prettier = { prefer_local = 'node_modules/.bin' },
     prettierd = { prefer_local = 'node_modules/.bin' },
+
+    mdformat = {
+      command = 'mdformat',
+      args = { '--wrap', '80', '$FILENAME' },
+      stdin = false,
+      tempfile_postfix = '.md',
+    },
 
     -- PHP formatters typically format files in-place
     pint = {
