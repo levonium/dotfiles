@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Prompt for MySQL credentials
+read -p "MySQL username: " MYSQL_USER
+read -s -p "MySQL password: " MYSQL_PWD
+echo
+read -p "Source database: " SRC_DB
+read -p "Target database: " TGT_DB
+
+# Drop and create target database
+echo "Dropping (if exists) and creating target database..."
+mysql -u "$MYSQL_USER" -p"$MYSQL_PWD" -e "DROP DATABASE IF EXISTS \`$TGT_DB\`;"
+mysql -u "$MYSQL_USER" -p"$MYSQL_PWD" -e "CREATE DATABASE \`$TGT_DB\`;"
+
+# Dump from source and import into target
+echo "Copying data from '$SRC_DB' to '$TGT_DB'..."
+mysqldump -u "$MYSQL_USER" -p"$MYSQL_PWD" "$SRC_DB" | mysql -u "$MYSQL_USER" -p"$MYSQL_PWD" "$TGT_DB"
+
+echo "✅ Done: '$SRC_DB' copied to '$TGT_DB'."

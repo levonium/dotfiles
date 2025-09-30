@@ -1,0 +1,190 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# makewebapp: create a site-specific app (SSB) launcher using Flatpak Chromium
+# Usage:
+#   makewebapp <app-id> <url> [-n "App Name"] [-i ICON_URL] [-f ICON_FILE]
+#            [-w WIDTH] [-h HEIGHT] [--browser CMD] [--uninstall]
+#
+# Examples:
+#   makewebapp xcom https://x.com -n "X"
+#   makewebapp figma https://www.figma.com -n "Figma" -w 1280 -h 800
+#   makewebapp notion https://www.notion.so -n "Notion" -i https://www.google.com/s2/favicons?domain=notion.so&sz=256
+#
+# Notes:
+# - Default browser command is "flatpak run org.chromium.Chromium"
+# - Each app gets its own profile in ~/.config/webapps/<app-id>
+# - Desktop file is created at ~/.local/share/applications/<app-id>.desktop
+# - Icon is stored at ~/.local/share/icons/webapps/<app-id>.png
+
+BROWSER_DEFAULT="flatpak run org.chromium.Chromium"
+
+show_help() {
+  cat <<'EOF'
+mkwebapp - create a site-specific launcher using Flatpak Chromium
+
+Usage:
+  mkwebapp <app-id> <url> [-n "App Name"] [-i ICON_URL] [-f ICON_FILE]
+           [-w WIDTH] [-h HEIGHT] [--browser CMD] [--uninstall]
+
+Examples:
+  mkwebapp xcom https://x.com -n "X"
+  mkwebapp figma https://www.figma.com -n "Figma" -w 1280 -h 800
+  mkwebapp notion https://www.notion.so -n "Notion" \
+    -i https://www.google.com/s2/favicons?domain=notion.so&sz=256
+
+Notes:
+  - Default browser is: flatpak run org.chromium.Chromium
+  - Creates: ~/.local/share/applications/<app-id>.desktop
+  - Profile: ~/.config/webapps/<app-id>
+  - Icon:    ~/.local/share/icons/webapps/<app-id>.png
+
+Uninstall:
+  - Run with --uninstall
+  - This leaves the profile in `~/.config/webapps/<app-id>`
+  - Remove it manually
+EOF
+}
+
+die() {
+  echo "Error: $*" >&2
+  exit 1
+}
+
+command_exists() {
+  command -v "$1" >/dev/null 2>&1
+}
+
+# Args
+APPID="${1:-}"
+URL="${2:-}"
+shift $(( $# >= 2 ? 2 : $# ))
+
+APPNAME=""
+ICON_URL=""
+ICON_FILE=""
+WIDTH=""
+HEIGHT=""
+BROWSER_CMD="$BROWSER_DEFAULT"
+UNINSTALL="false"
+
+while (( "$#" )); do
+  case "$1" in
+    -n|--name)        APPNAME="${2:-}"; shift 2 ;;
+    -i|--icon-url)    ICON_URL="${2:-}"; shift 2 ;;
+    -f|--icon-file)   ICON_FILE="${2:-}"; shift 2 ;;
+    -w|--width)       WIDTH="${2:-}"; shift 2 ;;
+    -h|--height)      HEIGHT="${2:-}"; shift 2 ;;
+    --browser)        BROWSER_CMD="${2:-}"; shift 2 ;;
+    --uninstall)      UNINSTALL="true"; shift 1 ;;
+    -h|--help)        show_help; exit 0 ;;
+    *)                echo "Unknown option: $1" >&2; show_help; exit 1 ;;
+  esac
+done
+
+if [[ -z "${APPID}" || -z "${URL}" ]]; then
+  show_help; exit 1
+fi
+
+# Basic sanitize for APPID: keep letters, digits, dashes, underscores, dots
+SANITIZED_APPID="$(echo -n "$APPID" | tr -cd '[:alnum:]._-' )"
+if [[ -z "$SANITIZED_APPID" ]]; then
+  die "Invalid app-id after sanitization"
+fi
+APPID="$SANITIZED_APPID"
+
+APPNAME="${APPNAME:-$APPID}"
+
+ICON_DIR="$HOME/.local/share/icons/webapps"
+DESKTOP_DIR="$HOME/.local/share/applications"
+PROFILE_DIR="$HOME/.config/webapps/$APPID"
+ICON_PATH="$ICON_DIR/$APPID.png"
+DESKTOP_PATH="$DESKTOP_DIR/$APPID.desktop"
+
+mkdir -p "$ICON_DIR" "$DESKTOP_DIR" "$PROFILE_DIR"
+
+# Check Flatpak Chromium unless user overrides browser
+if [[ "$BROWSER_CMD" == "$BROWSER_DEFAULT" ]]; then
+  if ! command_exists flatpak; then
+    die "Flatpak is not installed. Install it or pass --browser to use another binary."
+  fi
+  if ! flatpak info org.chromium.Chromium >/dev/null 2>&1; then
+    die "Flatpak Chromium (org.chromium.Chromium) is not installed. Install it or pass --browser."
+  fi
+fi
+
+if [[ "$UNINSTALL" == "true" ]]; then
+  rm -f "$DESKTOP_PATH"
+  rm -f "$ICON_PATH"
+  # Keep profile by default; uncomment next line if you want to delete it too
+  # rm -rf "$PROFILE_DIR"
+  update-desktop-database "$DESKTOP_DIR" >/dev/null 2>&1 || true
+  echo "Removed launcher: $DESKTOP_PATH"
+  echo "Removed icon: $ICON_PATH"
+  echo "Profile kept at: $PROFILE_DIR"
+  exit 0
+fi
+
+# Icon logic
+fetch_icon() {
+  local url="$1"
+  local out="$2"
+  if command_exists wget; then
+    wget -q -O "$out" "$url" && [[ -s "$out" ]]
+  elif command_exists curl; then
+    curl -sSL -o "$out" "$url" && [[ -s "$out" ]]
+  else
+    return 1
+  fi
+}
+
+if [[ -n "$ICON_FILE" ]]; then
+  cp -f "$ICON_FILE" "$ICON_PATH"
+elif [[ -n "$ICON_URL" ]]; then
+  fetch_icon "$ICON_URL" "$ICON_PATH" || true
+else
+  # Try to guess favicon from domain
+  DOMAIN="$(echo "$URL" | awk -F/ '{print $3}')"
+  if [[ -n "$DOMAIN" ]]; then
+    FAVICON_URL="https://www.google.com/s2/favicons?domain=${DOMAIN}&sz=256"
+    fetch_icon "$FAVICON_URL" "$ICON_PATH" || true
+  fi
+fi
+
+# If icon failed, fall back to a generic icon name the theme might have
+if [[ ! -s "$ICON_PATH" ]]; then
+  ICON_PATH="applications-internet"
+fi
+
+SIZE_FLAG=""
+if [[ -n "$WIDTH" && -n "$HEIGHT" ]]; then
+  SIZE_FLAG="--window-size=${WIDTH},${HEIGHT}"
+fi
+
+# Exec line
+EXEC_LINE="$BROWSER_CMD --class=$APPID --user-data-dir=$PROFILE_DIR --app=$URL"
+if [[ -n "$SIZE_FLAG" ]]; then
+  EXEC_LINE="$EXEC_LINE $SIZE_FLAG"
+fi
+
+# Write desktop file
+cat > "$DESKTOP_PATH" <<EOF
+[Desktop Entry]
+Name=$APPNAME
+Exec=$EXEC_LINE
+Terminal=false
+Type=Application
+Icon=$ICON_PATH
+Categories=Network;
+StartupWMClass=$APPID
+EOF
+
+# Refresh desktop DB (best effort)
+update-desktop-database "$DESKTOP_DIR" >/dev/null 2>&1 || true
+
+echo "Created launcher: $DESKTOP_PATH"
+echo "Profile directory: $PROFILE_DIR"
+echo "Icon: $ICON_PATH"
+echo "Run command:"
+echo "  $EXEC_LINE"
+

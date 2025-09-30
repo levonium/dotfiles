@@ -12,7 +12,21 @@ ln -s $DOTFILES/nvim $HOME/.config/nvim
 
 mkdir -p $HOME/.local/bin
 rm -rf $HOME/.local/bin/t
-ln -s $DOTFILES/scripts/t $HOME/.local/bin/t
+for script in "$DOTFILES"/scripts/*; do
+  [ -x "$script" ] || continue   # skip if not executable
+  ln -sf "$script" "$HOME/.local/bin/$(basename "$script")"
+done
 
+rm -rf $HOME/.shell
+mkdir $HOME/.shell
+ln -s $DOTFILES/shell/aliases $HOME/.shell/aliases
+ln -s $DOTFILES/shell/prompt.sh $HOME/.shell/prompt
+ln -sf $HOME/.shell/aliases $HOME/.bash_aliases
+PROMTLINE='[ -f "$HOME/.prompt" ] && source "$HOME/.prompt"'
+grep -qxF "$PROMTLINE" "$HOME/.bashrc" || echo "$PROMTLINE" >> "$HOME/.bashrc"
 
-[ -f ~/.bash_aliases ] && source ~/.bash_aliases
+if ! echo "$PATH" | grep -q "$HOME/.local/bin"; then
+  echo 'export PATH="$HOME/.local/bin:$PATH"' >> "$HOME/.bashrc"
+fi
+
+[ -f ~/.bashrc ] && source ~/.bashrc

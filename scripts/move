@@ -1,0 +1,8 @@
+#!/bin/bash
+
+while true; do
+    canberra-gtk-play --id="desktop-login"
+
+    sleep 300
+done
+

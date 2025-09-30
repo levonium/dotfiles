@@ -1,0 +1,86 @@
+#### please please please
+alias please='sudo $(history -p !!)'
+
+#### today's todos
+alias today="cat ~/Documents/zucchini/today.md"
+alias tasks="today"
+alias todo="today"
+
+
+#### git aliases
+alias ga="git add -A"
+alias gc="git commit -m"
+alias gss="git status"
+alias gps="git push origin main"
+alias gpl="git pull origin main"
+alias glo="git log --oneline"
+alias co="git checkout"
+alias com="git checkout main"
+alias cob="git checkout -b"
+alias wip='git add -A && git commit -m "wip" && git push'
+alias gsq="git reset --soft main && git commit -m "
+
+# Thanks to Jeffrey Way
+nah () {
+    git reset --hard
+    git clean -df
+    if [ -d ".git/rebase-apply" ] || [ -d ".git/rebase-merge" ]; then
+        git rebase --abort
+    fi
+}
+
+#### wp #### laravel #### php ####
+alias installwp="wget http://wordpress.org/latest.tar.gz && tar xfz latest.tar.gz && mv wordpress/* ./ && rmdir ./wordpress/ && rm -f latest.tar.gz"
+
+alias a="php artisan"
+alias t="php artisan tinker"
+alias at="php artisan test"
+alias atp="php artisan test --parallel"
+
+alias mig="php artisan migrate"
+alias migf="php artisan migrate:fresh"
+alias migfs="php artisan migrate:fresh --seed"
+
+alias pint="./vendor/bin/pint"
+alias dump="composer dumpautoload"
+
+
+#### npm aliases
+alias npmw="npm run watch"
+alias npmp="npm run production"
+alias npmd="npm run dev"
+alias npmb="npm run build"
+
+
+#### careful!
+alias rm="echo 'This is not the command you are looking for 😋 Try trash-put, maybe'; false"
+alias jnjel="trash-put"
+
+#### go on, do what you need to do
+alias goon="sudo apt update && sudo apt upgrade -y"
+
+
+#### editors
+alias vim=nvim
+alias c="code ."
+alias cx="code . && exit"
+alias o="xdg-open "
+
+
+#### navigation
+alias ".."="cd .."
+alias z="cd -"
+alias ":q"="exit"
+
+
+#### project-specific
+alias "alias:create"="cd ~/code/projects/addy-io-cli/ && a alias:create"
+alias "alias:list"="cd ~/code/projects/addy-io-cli/ && a alias:list"
+
+alias aichat="cd ~/code/ai/llama-chat/ && a llama:chat"
+alias aiask="cd ~/code/ai/llama-chat/ && a llama:ask"
+
+
+#### other aliases
+[ -f ~/.tmux/tmuxaliases ] && source ~/.tmux/tmuxaliases
+

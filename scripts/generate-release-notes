@@ -1,0 +1,155 @@
+#!/bin/bash
+
+# Function to show usage
+show_usage() {
+    echo "Usage: $0 [options]"
+    echo "Options:"
+    echo "  -r, --repo PATH    Path to the git repository (default: current directory)"
+    echo "  -n, --num NUM      Number of commits to process (default: 3)"
+    echo "  -h, --help         Show this help message"
+    echo
+    echo "Example:"
+    echo "  $0 -r /path/to/repo -n 5    # Process 5 commits from specified repo"
+    echo "  $0 -n 10                     # Process 10 commits from current directory"
+}
+
+# Default values
+repo_path="."
+num_commits=3
+
+# Parse command line arguments
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        -r|--repo)
+            repo_path="$2"
+            shift 2
+            ;;
+        -n|--num)
+            num_commits="$2"
+            shift 2
+            ;;
+        -h|--help)
+            show_usage
+            exit 0
+            ;;
+        *)
+            echo "Unknown option: $1"
+            show_usage
+            exit 1
+            ;;
+    esac
+done
+
+# Validate repository path
+if [ ! -d "$repo_path" ]; then
+    echo "Error: Repository path '$repo_path' does not exist"
+    exit 1
+fi
+
+# Validate if it's a git repository
+if [ ! -d "$repo_path/.git" ]; then
+    echo "Error: '$repo_path' is not a git repository"
+    exit 1
+fi
+
+# Function to categorize commit messages
+categorize_commit() {
+    local message=$1
+    local category=""
+
+    # Check for feature-related keywords
+    if [[ $message =~ (add|new|implement|support|introduce|create|enable) ]]; then
+        category="🌟 New Features"
+    # Check for UI/UX related keywords
+    elif [[ $message =~ (ui|ux|design|style|layout|interface|theme|visual) ]]; then
+        category="🎨 UI/UX Updates"
+    # Check for improvement-related keywords
+    elif [[ $message =~ (improve|enhance|optimize|refactor|update|upgrade|better) ]]; then
+        category="🔧 Improvements"
+    # Check for technical changes
+    elif [[ $message =~ (technical|code|structure|architecture|system|framework) ]]; then
+        category="🛠️ Technical Changes"
+    # Check for bug fixes
+    elif [[ $message =~ (fix|bug|issue|error|problem|resolve|correct) ]]; then
+        category="🐛 Bug Fixes"
+    else
+        category="📝 Other Changes"
+    fi
+
+    echo "$category"
+}
+
+# Store current directory
+current_dir=$(pwd)
+
+# Change to repository directory
+cd "$repo_path" || exit 1
+
+# Get the commits
+commits=$(git log -p -$num_commits | cat)
+
+# Initialize categories
+declare -A categories
+categories["🌟 New Features"]=""
+categories["🎨 UI/UX Updates"]=""
+categories["🔧 Improvements"]=""
+categories["🛠️ Technical Changes"]=""
+categories["🐛 Bug Fixes"]=""
+categories["📝 Other Changes"]=""
+
+# Process each commit
+current_commit=""
+current_message=""
+while IFS= read -r line; do
+    if [[ $line =~ ^commit ]]; then
+        # Process previous commit if exists
+        if [ ! -z "$current_commit" ]; then
+            category=$(categorize_commit "$current_message")
+            categories[$category]+="- $current_message\n"
+        fi
+        current_commit=$line
+        current_message=""
+    elif [[ $line =~ ^Author: ]]; then
+        continue
+    elif [[ $line =~ ^Date: ]]; then
+        continue
+    elif [[ $line =~ ^$ ]]; then
+        continue
+    elif [[ $line =~ ^diff ]]; then
+        continue
+    else
+        # Add to current message if it's not empty
+        if [ ! -z "$current_message" ]; then
+            current_message+=" "
+        fi
+        current_message+=$(echo "$line" | sed 's/^    //')
+    fi
+done <<< "$commits"
+
+# Add the last commit
+if [ ! -z "$current_commit" ]; then
+    category=$(categorize_commit "$current_message")
+    categories[$category]+="- $current_message\n"
+fi
+
+# Print the release notes
+echo "## 🌟 New Features"
+echo -e "${categories["🌟 New Features"]}"
+
+echo -e "\n## 🎨 UI/UX Updates"
+echo -e "${categories["🎨 UI/UX Updates"]}"
+
+echo -e "\n## 🔧 Improvements"
+echo -e "${categories["🔧 Improvements"]}"
+
+echo -e "\n## 🛠️ Technical Changes"
+echo -e "${categories["🛠️ Technical Changes"]}"
+
+echo -e "\n## 🐛 Bug Fixes"
+echo -e "${categories["🐛 Bug Fixes"]}"
+
+echo -e "\n## 📝 Other Changes"
+echo -e "${categories["📝 Other Changes"]}"
+
+# Return to original directory
+cd "$current_dir" || exit 1

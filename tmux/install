@@ -9,16 +9,6 @@ chmod +x $HOME/.tmux/tmuxsave.sh
 chmod +x $HOME/.tmux/tmuxstart.sh
 chmod +x $HOME/.tmux/tmuxrestore.sh
 
-# Aliases
-ALIASES="$HOME/.bash_aliases"
-LINE='[ -f ~/.tmux/tmuxaliases ] && source ~/.tmux/tmuxaliases'
-
-# create the symlink
+# Aliases, this is included in $DOTFILES/shell/aliases
 ln -s $DOTFILES/tmux/tmux-aliases $HOME/.tmux/tmuxaliases
-
-# make sure the file exists
-[ -f "$ALIASES" ] || : > "$ALIASES"
-
-# append only if not already present
-grep -qxF "$LINE" "$ALIASES" || echo "$LINE" >> "$ALIASES"
 
