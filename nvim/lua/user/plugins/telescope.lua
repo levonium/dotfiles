@@ -59,6 +59,7 @@ require('telescope').setup({
 require('telescope').load_extension('fzf')
 
 vim.keymap.set('n', '<C-p>', [[<cmd>lua require('telescope.builtin').find_files()<CR>]])
-vim.keymap.set('n', '<C-p-p>', [[<cmd>lua require('telescope.builtin').find_files({ no_ignore = true, prompt_title = 'All Files' })<CR>]])
+vim.keymap.set('n', '<C-p-p>',
+    [[<cmd>lua require('telescope.builtin').find_files({ no_ignore = true, prompt_title = 'All Files' })<CR>]])
 vim.keymap.set('n', '<C-e>', [[<cmd>lua require('telescope.builtin').buffers()<CR>]])
 vim.keymap.set('n', '<C-f>', [[<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>]])

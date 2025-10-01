@@ -32,10 +32,10 @@ conform.setup({
     json = { 'prettierd', 'prettier' },
     jsonc = { 'prettierd', 'prettier' },
     yaml = { 'prettierd', 'prettier' },
-    markdown = { 'prettierd', 'prettier', 'mdformat' },
     lua = { 'stylua' },
     php = { 'pint', 'php_cs_fixer' },
     sh = { 'shfmt' },
+    markdown = { 'prettierd', 'prettier', 'mdformat' },
   },
 
   -- Formatter definitions and local-preference

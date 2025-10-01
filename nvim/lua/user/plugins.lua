@@ -1,3 +1,5 @@
+-- We are using Packer, which is apparently unmaintained.
+-- It is recommended to use lazy.nvim or pckr.nvim
 local ensure_packer = function()
     local fn = vim.fn
     local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
@@ -27,73 +29,13 @@ local use = require('packer').use
 use('wbthomason/packer.nvim')
 
 -- Colorscheme
-use({
-    'folke/tokyonight.nvim',
-    config = function()
-        require('tokyonight').setup({
-            transparent = true,
-            styles = {
-                sidebars = 'transparent',
-                floats = 'transparent',
-            },
-        })
+use(require('user.theme'))
 
-        vim.cmd('colorscheme tokyonight')
-
-        local function get_hl(name)
-            local ok, hl = pcall(vim.api.nvim_get_hl_by_name, name, true)
-            if not ok then
-                return {}
-            end
-            return hl
-        end
-
-        local function make_transparent(group)
-            vim.api.nvim_set_hl(0, group, { bg = 'NONE' })
-        end
-
-        local normal = get_hl('Normal')
-        local normal_float = get_hl('NormalFloat')
-        local float_border = get_hl('FloatBorder')
-
-        make_transparent('Normal')
-        make_transparent('NormalFloat')
-        make_transparent('SignColumn')
-        make_transparent('EndOfBuffer')
-        local float_border_fg = float_border.foreground or normal_float.foreground or normal.foreground
-        local float_border_opts = { bg = 'NONE' }
-
-        if float_border_fg then
-            float_border_opts.fg = float_border_fg
-        end
-
-        vim.api.nvim_set_hl(0, 'FloatBorder', float_border_opts)
-
-        vim.api.nvim_set_hl(0, 'NvimTreeIndentMarker', { fg = '#30323E' })
-
-        local non_text = get_hl('NonText')
-        local status_line = get_hl('StatusLine')
-
-        if non_text.foreground and status_line.background then
-            vim.api.nvim_set_hl(0, 'StatusLineNonText', {
-                fg = non_text.foreground,
-                bg = status_line.background,
-            })
-        end
-    end
-})
-
--- Commenting support
+-- Commenting support, // gcc
 use('tpope/vim-commentary')
 
--- Add,change and delete surrounding text
+-- Add, change and delete surrounding text // cs"', ds(, ysis{
 use('tpope/vim-surround')
-
--- Useful commands like :Rename and :sudoWrite
-use('tpope/vim-eunuch')
-
--- Pairs of handy bracket mappings, like [b and ]b
-use('tpope/vim-unimpaired')
 
 -- Indent autodetection with .editorconfig support
 use('tpope/vim-sleuth')
@@ -101,16 +43,13 @@ use('tpope/vim-sleuth')
 -- Allow plugins to enable repeating commands (.)
 use('tpope/vim-repeat')
 
--- Just to the last location when opening a file
+-- Jump to the last location when opening a file
 use('farmergreg/vim-lastplace')
 
--- Enable search for visually selected text
+-- Enable search for visually selected text // v + *
 use('nelstrom/vim-visual-star-search')
 
--- Automatically create parent missing dirs when saving
-use('jessarcher/vim-heritage')
-
--- Text objects for HTML attributes
+-- Text objects for HTML attributes // ix ax
 use({
     'whatyouhide/vim-textobj-xmlattr',
     requires = 'kana/vim-textobj-user',
@@ -135,18 +74,7 @@ use({
     end
 })
 
--- Easy navigation between vim and tmux panes
-use('christoomey/vim-tmux-navigator')
-
--- Add smooth scrolling
--- use({
---     'karb94/neoscroll.nvim',
---     config = function()
---         require('neoscroll').setup()
---     end
--- })
-
--- Split arrays and methods onto multiple lines, or join them back
+-- Split arrays, methods, tags, etc. onto multiple lines, or join them back // gS gJ
 use({
     'AndrewRadev/splitjoin.vim',
     config = function()
@@ -196,29 +124,6 @@ use({
     end
 })
 
--- Buffer tabs
--- use({
---     'akinsho/bufferline.nvim',
---     requires = 'kyazdani42/nvim-web-devicons',
---     after = 'tokyonight.nvim',
---     config = function()
---         require('user/plugins/bufferline')
---     end
--- })
-
--- Display indentation lines
--- use({
---     'lukas-reineke/indent-blankline.nvim',
---     config = function()
---         require('indent_blankline').setup()
---     end
--- })
-
--- Dashboard
--- use({
---     'glepnir/dashboard-nvim'
--- })
-
 -- Git integration
 use({
     'lewis6991/gitsigns.nvim',
@@ -226,11 +131,11 @@ use({
         require('gitsigns').setup({
             current_line_blame = true
         })
-        vim.keymap.set('n', ']h', ':Gitsigns next_hunk<CR>')
-        vim.keymap.set('n', '[h', ':Gitsigns prev_hunk<CR>')
-        vim.keymap.set('n', 'gs', ':Gitsigns stage_hunk<CR>')
-        vim.keymap.set('n', 'gS', ':Gitsigns undo_stage_hunk<CR>')
-        vim.keymap.set('n', 'gp', ':Gitsigns preview_hunk<CR>')
+        -- vim.keymap.set('n', ']h', ':Gitsigns next_hunk<CR>')
+        -- vim.keymap.set('n', '[h', ':Gitsigns prev_hunk<CR>')
+        -- vim.keymap.set('n', 'gs', ':Gitsigns stage_hunk<CR>')
+        -- vim.keymap.set('n', 'gS', ':Gitsigns undo_stage_hunk<CR>')
+        -- vim.keymap.set('n', 'gp', ':Gitsigns preview_hunk<CR>')
         vim.keymap.set('n', 'gb', ':Gitsigns blame_line<CR>')
     end
 })
@@ -240,11 +145,6 @@ use({
     config = function()
         require('user.plugins.diffview')
     end
-})
-
-use({
-    'tpope/vim-fugitive',
-    requires = 'tpope/vim-rhubarb'
 })
 
 -- Floating terminal.
@@ -301,8 +201,7 @@ use({
     run = function()
         require('nvim-treesitter.install').update({ with_sync = true })
     end,
-    rewuires = {
-        'JooepAlviste/nvim-ts-context-commentstring',
+    requires = {
         'nvim-treesitter/nvim-treesitter-textobjects',
     },
     config = function()

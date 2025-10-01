@@ -1,6 +1,6 @@
 require('nvim-tree').setup({
     git = {
-        ignore = false,
+        ignore = true,
     },
     renderer = {
         group_empty = true,
