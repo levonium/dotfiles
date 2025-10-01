@@ -236,6 +236,13 @@ use({
 })
 
 use({
+    'sindrets/diffview.nvim',
+    config = function()
+        require('user.plugins.diffview')
+    end
+})
+
+use({
     'tpope/vim-fugitive',
     requires = 'tpope/vim-rhubarb'
 })
