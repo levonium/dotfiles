@@ -21,7 +21,13 @@ ln -s $DOTFILES/wezterm/wezterm.lua $HOME/.wezterm.lua
 rm -rf $HOME/.config/nvim
 ln -s $DOTFILES/nvim $HOME/.config/nvim
 
+# --- zed
+
+rm -rf $HOME/.config/zed
+ln -s $DOTFILES/zed $HOME/.config/zed
+
 # --- zellij
+
 rm -rf $HOME/.config/zellij
 mkdir $HOME/.config/zellij
 ln -s $DOTFILES/zellij/congig.kdl $HOME/.config/zellij/config.kdl

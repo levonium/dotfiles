@@ -1,0 +1,244 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p) ->
+
+{
+  // ## THEME
+  "theme": {
+    "mode": "light",
+    "light": "Tokyo Night Storm",
+    "dark": "Tokyo Night"
+  },
+
+  // ## KEYMAP
+  "base_keymap": "VSCode",
+
+  // ## UI FONT
+  "ui_font_family": "JetBrains Mono",
+  "ui_font_weight": 300.0,
+  "ui_font_size": 16,
+
+  // ## BUFFER FONT
+  "buffer_font_family": "JetBrains Mono",
+  "buffer_font_weight": 250.0,
+  "buffer_font_size": 16.0,
+  "buffer_line_height": {
+    "custom": 1.8
+  },
+
+  // ## TITLE BAR
+  "title_bar": {
+    "show_branch_icon": true, // Show/hide branch icon beside branch switcher
+    "show_branch_name": true, // Show/hide branch name
+    "show_project_items": true, // Show/hide project host and name
+    "show_onboarding_banner": false, // Show/hide onboarding banners
+    "show_user_picture": false, // Show/hide user avatar
+    "show_sign_in": false, // Show/hide sign-in button
+    "show_menus": false // Show/hide menus
+  },
+
+  // ## WORKSPACE
+  "use_system_path_prompts": true,
+  "use_system_prompts": true,
+  "active_pane_modifiers": {
+    "border_size": 1.0,
+    "inactive_opacity": 0.8
+  },
+  "bottom_dock_layout": "contained",
+
+  // ## EDITOR
+  "cursor_blink": true,
+  "cursor_shape": null, // bar, block, underline, hollow
+  "current_line_highlight": "all", // none, gutter, line, all
+  "hide_mouse": "on_typing_and_movement", // never, on_typing, on_typing_and_movement
+  "selection_highlight": true,
+  "show_whitespaces": "selection", // none, all, selection, boundary, trailing
+  "whitespace_map": {
+    "space": "•",
+    "tab": "⟶"
+  },
+  "unnecessary_code_fade": 0.3,
+  "redact_private_values": false, // hide the values of in variables from visual display in private files
+
+  // Soft-wrap and rulers
+  "soft_wrap": "none", // none, editor_width, preferred_line_length, bounded
+  "preferred_line_length": 80, // Column to soft-wrap
+  "show_wrap_guides": true, // Show/hide wrap guides (vertical rulers)
+  "wrap_guides": [], // Where to position wrap_guides (character counts)
+
+  // Gutter Settings
+  "gutter": {
+    "line_numbers": true,
+    "runnables": false,
+    "breakpoints": false,
+    "folds": true,
+    "min_line_number_digits": 3
+  },
+  "relative_line_numbers": "enabled",
+
+  // Indent guides
+  "indent_guides": {
+    "enabled": true,
+    "line_width": 1, // Width of guides in pixels [1-10]
+    "active_line_width": 1, // Width of active guide in pixels [1-10]
+    "coloring": "indent_aware", // disabled, fixed, indent_aware
+    "background_coloring": "disabled" // disabled, indent_aware
+  },
+
+  "sticky_scroll": {
+    "enabled": false
+  },
+
+  // ### Editor toolbar
+  "toolbar": {
+    "breadcrumbs": true, // Whether to show breadcrumbs.
+    "quick_actions": false, // Whether to show quick action buttons.
+    "selections_menu": false, // Whether to show the Selections menu
+    "agent_review": false,
+    "code_actions": false // Whether to show code action buttons
+  },
+
+  // ### Editor tabs
+  "max_tabs": null, // Maximum number of tabs per pane
+  "tab_bar": {
+    "show": true,
+    "show_nav_history_buttons": true,
+    "show_tab_bar_buttons": false
+  },
+  "tabs": {
+    "git_status": true,
+    "close_position": "right",
+    "show_close_button": "hover",
+    "file_icons": false,
+    "show_diagnostics": "off" // off, errors, all
+  },
+
+  // ## PROJECT PANEL
+  "project_panel": {
+    "button": true,
+    "default_width": 320,
+    "dock": "right", // left, right
+    "entry_spacing": "comfortable", // omfortable, standard
+    "file_icons": true,
+    "folder_icons": true,
+    "git_status": true,
+    "indent_size": 20,
+    "auto_reveal_entries": true,
+    "auto_fold_dirs": true,
+    "sticky_scroll": true,
+    "drag_and_drop": true,
+    "scrollbar": {
+      "show": null // auto, system, always, never
+    },
+    "show_diagnostics": "all",
+    "indent_guides": {
+      "show": "always" // always, never
+    },
+    "sort_mode": "directories_first", // directories_first, mixed, files_first
+    "hide_root": false,
+    "hide_hidden": false
+  },
+
+  // ## TERMINAL
+  "terminal": {
+    "dock": "bottom", // left, right, bottom
+    "button": true,
+    "default_width": 640,
+    "default_height": 320,
+
+    "blinking": "terminal_controlled", // on, off, terminal_controlled
+    "cursor_shape": "block", // block, bar, underline, hollow
+    "font_family": "JetBrains Mono",
+    "font_size": 15,
+    "font_weight": 400,
+    "line_height": "standard",
+
+    "scrollbar": {
+      "show": null // auto, system, always, never
+    }
+
+    // Environment variables to add to terminal's process environment
+    // "env": {
+    // "KEY": "value"
+    // },
+  },
+
+  // ## OTHER PANELS
+
+  // ### Agent Panel
+  "agent": {
+    "enabled": true,
+    "button": true,
+    "dock": "left",
+    "default_width": 320,
+    "default_height": 320
+  },
+  "agent_ui_font_size": 16,
+  "agent_buffer_font_size": 14,
+
+  // ### Git Panel
+  "git_panel": {
+    "button": true,
+    "dock": "right",
+    "default_width": 360,
+    "status_style": "icon", // label_color, icon
+    "sort_by_path": false, // Sort by path (false) or status (true)
+    "scrollbar": {
+      "show": null // auto, system, always, never
+    }
+  },
+
+  // ### Debugger Panel
+  "debugger": {
+    "button": false,
+    "dock": "bottom"
+  },
+
+  // ### Outline Panel
+  "outline_panel": {
+    "button": true,
+    "default_width": 320,
+    "dock": "right",
+    "file_icons": true,
+    "folder_icons": true,
+    "git_status": true,
+    "indent_size": 20,
+    "indent_guides": {
+      "show": "always"
+    },
+    "auto_reveal_entries": true,
+    "auto_fold_dirs": true,
+    "scrollbar": {
+      "show": null // auto, system, always, never
+    }
+  },
+
+  // ### Collaboration Panel
+  "collaboration_panel": {
+    "button": false,
+    "dock": "right",
+    "default_width": 320
+  },
+
+  // ### Notification Panel
+  "notification_panel": {
+    "button": true,
+    "dock": "right",
+    "default_width": 320
+  },
+
+  // ## STATUS BAR
+  "status_bar": {
+    "active_language_button": true,
+    "cursor_position_button": true,
+    "line_endings_button": true
+  },
+  "global_lsp_settings": {
+    "button": true
+  }
+}
