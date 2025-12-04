@@ -2,28 +2,56 @@
 
 DOTFILES=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
 
+# --- tmux
+
+source $DOTFILES/tmux/install
+
+# --- kitty
+
 rm -rf $HOME/.config/kitty
 ln -s $DOTFILES/kitty $HOME/.config/kitty
 
-source $DOTFILES/tmux/install
+# --- wezterm
+
+rm -rf $HOME/.wezterm.lua
+ln -s $DOTFILES/wezterm/wezterm.lua $HOME/.wezterm.lua
+
+# --- neovim
 
 rm -rf $HOME/.config/nvim
 ln -s $DOTFILES/nvim $HOME/.config/nvim
 
-mkdir -p $HOME/.local/bin
-rm -rf $HOME/.local/bin/t
-for script in "$DOTFILES"/scripts/*; do
-  [ -x "$script" ] || continue   # skip if not executable
-  ln -sf "$script" "$HOME/.local/bin/$(basename "$script")"
-done
+# --- zellij
+rm -rf $HOME/.config/zellij
+mkdir $HOME/.config/zellij
+ln -s $DOTFILES/zellij/congig.kdl $HOME/.config/zellij/config.kdl
+
+# --- ./shell
 
 rm -rf $HOME/.shell
 mkdir $HOME/.shell
+
 ln -s $DOTFILES/shell/aliases $HOME/.shell/aliases
-ln -s $DOTFILES/shell/prompt.sh $HOME/.shell/prompt
 ln -sf $HOME/.shell/aliases $HOME/.bash_aliases
+
+ln -s $DOTFILES/shell/prompt.sh $HOME/.shell/prompt
 PROMTLINE='[ -f "$HOME/.prompt" ] && source "$HOME/.prompt"'
 grep -qxF "$PROMTLINE" "$HOME/.bashrc" || echo "$PROMTLINE" >> "$HOME/.bashrc"
+
+cp $DOTFILES/shell/workspace-indicators.css $HOME/workspace-indicators.css
+
+source $DOTFILES/shell/keybindings
+
+# --- ./scripts
+
+mkdir -p $HOME/.local/bin
+for script in "$DOTFILES"/scripts/*; do
+  [ -x "$script" ] || continue   # skip if not executable
+  rm -rf "$HOME/.local/bin/$(basename "$script")"
+  ln -sf "$script" "$HOME/.local/bin/$(basename "$script")"
+done
+
+#--- $PATH
 
 if ! echo "$PATH" | grep -q "$HOME/.local/bin"; then
   echo 'export PATH="$HOME/.local/bin:$PATH"' >> "$HOME/.bashrc"

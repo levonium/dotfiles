@@ -53,7 +53,8 @@ alias npmb="npm run build"
 
 
 #### careful!
-alias rm="echo 'This is not the command you are looking for 😋 Try trash-put, maybe'; false"
+## alias rm="echo 'This is not the command you are looking for 😋 Try trash-put, maybe'; false"
+alias rm="trash-put"
 alias jnjel="trash-put"
 
 #### go on, do what you need to do
