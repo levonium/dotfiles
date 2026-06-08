@@ -31,6 +31,7 @@ nah () {
 
 #### wp #### laravel #### php ####
 alias installwp="wget http://wordpress.org/latest.tar.gz && tar xfz latest.tar.gz && mv wordpress/* ./ && rmdir ./wordpress/ && rm -f latest.tar.gz"
+alias createwpuser="wp user create levon levon@drim.io --role=administrator --user_pass=levon"
 
 alias a="php artisan"
 alias t="php artisan tinker"
@@ -81,6 +82,7 @@ alias "alias:list"="cd ~/code/projects/addy-io-cli/ && a alias:list"
 alias aichat="cd ~/code/ai/llama-chat/ && a llama:chat"
 alias aiask="cd ~/code/ai/llama-chat/ && a llama:ask"
 
+alias untar='tar -xzvf'
 
 #### other aliases
 [ -f ~/.tmux/tmuxaliases ] && source ~/.tmux/tmuxaliases

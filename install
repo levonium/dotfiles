@@ -16,6 +16,13 @@ ln -s $DOTFILES/kitty $HOME/.config/kitty
 rm -rf $HOME/.wezterm.lua
 ln -s $DOTFILES/wezterm/wezterm.lua $HOME/.wezterm.lua
 
+
+# --- alacritty
+
+
+rm -rf $HOME/.config/alacritty
+ln -s $DOTFILES/alacritty $HOME/.config/alacritty
+
 # --- neovim
 
 rm -rf $HOME/.config/nvim

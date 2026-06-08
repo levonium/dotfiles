@@ -9,9 +9,14 @@
 
 {
   // ## THEME
+  "icon_theme": {
+    "mode": "light",
+    "light": "Zed (Default)",
+    "dark": "Zed (Default)"
+  },
   "theme": {
     "mode": "light",
-    "light": "Tokyo Night Storm",
+    "light": "One Light",
     "dark": "Tokyo Night"
   },
 
@@ -53,9 +58,9 @@
 
   // ## EDITOR
   "cursor_blink": true,
-  "cursor_shape": null, // bar, block, underline, hollow
+  "cursor_shape": "bar", // bar, block, underline, hollow
   "current_line_highlight": "all", // none, gutter, line, all
-  "hide_mouse": "on_typing_and_movement", // never, on_typing, on_typing_and_movement
+  "hide_mouse": "never", // never, on_typing, on_typing_and_movement
   "selection_highlight": true,
   "show_whitespaces": "selection", // none, all, selection, boundary, trailing
   "whitespace_map": {
@@ -66,7 +71,7 @@
   "redact_private_values": false, // hide the values of in variables from visual display in private files
 
   // Soft-wrap and rulers
-  "soft_wrap": "none", // none, editor_width, preferred_line_length, bounded
+  "soft_wrap": "editor_width", // none, editor_width, preferred_line_length, bounded
   "preferred_line_length": 80, // Column to soft-wrap
   "show_wrap_guides": true, // Show/hide wrap guides (vertical rulers)
   "wrap_guides": [], // Where to position wrap_guides (character counts)
@@ -183,11 +188,12 @@
 
   // ### Git Panel
   "git_panel": {
+    "tree_view": true,
     "button": true,
     "dock": "right",
     "default_width": 360,
     "status_style": "icon", // label_color, icon
-    "sort_by_path": false, // Sort by path (false) or status (true)
+    "sort_by_path": true, // Sort by path (false) or status (true)
     "scrollbar": {
       "show": null // auto, system, always, never
     }

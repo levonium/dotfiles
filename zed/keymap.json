@@ -11,89 +11,78 @@
     "context": "Workspace",
     "bindings": {
       // "shift shift": "file_finder::Toggle"
-    }
+    },
   },
   {
     "context": "Editor && vim_mode == insert",
     "bindings": {
       // "j k": "vim::NormalBefore"
-    }
+    },
   },
   {
     "context": "Workspace",
     "bindings": {
-      "ctrl-shift-d": null
-    }
+      "ctrl-shift-d": null,
+    },
   },
   {
     "context": "Editor",
     "bindings": {
-      "ctrl-shift-d": "editor::DuplicateLineDown"
-    }
+      "ctrl-shift-d": "editor::DuplicateLineDown",
+    },
   },
   {
     "context": "ContextEditor > Editor",
     "bindings": {
-      "ctrl-enter": null
-    }
+      "ctrl-enter": null,
+    },
   },
   {
     "context": "!ContextEditor > (Editor && mode == full)",
     "bindings": {
-      "ctrl-enter": null
-    }
+      "ctrl-enter": null,
+    },
   },
   {
     "context": "Terminal",
     "bindings": {
-      "ctrl-enter": null
-    }
+      "ctrl-enter": null,
+    },
   },
   {
     "context": "Editor",
     "bindings": {
-      "ctrl-enter": "editor::NewlineBelow"
-    }
+      "ctrl-enter": "editor::NewlineBelow",
+    },
   },
   {
     "context": "Editor",
     "bindings": {
-      "ctrl-shift-enter": "editor::NewlineAbove"
-    }
+      "ctrl-shift-enter": "editor::NewlineAbove",
+    },
   },
   {
     "context": "Workspace",
     "bindings": {
-      "ctrl-alt-b": "workspace::ToggleLeftDock"
-    }
+      "ctrl-alt-b": "workspace::ToggleLeftDock",
+    },
   },
   {
     "context": "Workspace",
     "bindings": {
-      "ctrl-b": "workspace::ToggleRightDock"
-    }
+      "ctrl-b": "workspace::ToggleRightDock",
+    },
   },
   {
     "context": "Workspace",
     "bindings": {
-      "ctrl-k ctrl-e": "project_panel::ToggleFocus"
-    }
+      "ctrl-k ctrl-e": "project_panel::ToggleFocus",
+    },
   },
   {
     "context": "Workspace",
     "bindings": {
-      "ctrl-k ctrl-v": "git_panel::ToggleFocus"
-    }
+      "ctrl-k ctrl-v": "git_panel::ToggleFocus",
+    },
   },
-
-  {
-    "bindings": {
-      "ctrl-alt-g": [
-        "agent::NewExternalAgentThread",
-        {
-          "agent": "gemini"
-        }
-      ]
-    }
-  }
 ]

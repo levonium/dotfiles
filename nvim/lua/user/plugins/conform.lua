@@ -35,7 +35,7 @@ conform.setup({
     lua = { 'stylua' },
     php = { 'pint', 'php_cs_fixer' },
     sh = { 'shfmt' },
-    markdown = { 'prettierd', 'prettier', 'mdformat' },
+    markdown = { 'prettierd', 'prettier' },
   },
 
   -- Formatter definitions and local-preference
@@ -44,23 +44,10 @@ conform.setup({
     prettier = { prefer_local = 'node_modules/.bin' },
     prettierd = { prefer_local = 'node_modules/.bin' },
 
-    mdformat = {
-      command = 'mdformat',
-      args = { '--wrap', '80', '$FILENAME' },
-      stdin = false,
-      tempfile_postfix = '.md',
-    },
-
     -- PHP formatters typically format files in-place
     pint = {
       command = 'pint',
       args = { '--quiet', '$FILENAME' },
-      stdin = false,
-      prefer_local = 'vendor/bin',
-    },
-    php_cs_fixer = {
-      command = 'php-cs-fixer',
-      args = { 'fix', '--using-cache=no', '--quiet', '$FILENAME' },
       stdin = false,
       prefer_local = 'vendor/bin',
     },
