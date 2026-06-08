@@ -1,0 +1,33 @@
+# Afflabio Light
+
+[colors.primary]
+background = "#f4f1ec"
+foreground = "#0c0c0c"
+
+[colors.cursor]
+text = "#fefcf7"
+cursor = "#9d122b"
+
+[colors.normal]
+black = "#6d6a60"
+red = "#c8203d"
+green = "#22463a"
+yellow = "#f0b840"
+blue = "#4a6380"
+magenta = "#895e7a"
+cyan = "#4e7a6a"
+white = "#ebe5d8"
+
+[colors.bright]
+black = "#6d6a60"
+red = "#db3f5a"
+green = "#2d5f4f"
+yellow = "#f2c55f"
+blue = "#5e7ea0"
+magenta = "#a07090"
+cyan = "#60a090"
+white = "#fefcf7"
+
+[colors.selection]
+background = "#e2dac6"
+foreground = "#0c0c0c"

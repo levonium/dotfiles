@@ -1,0 +1,29 @@
+# Pickle Blue - deep blue forest
+
+[colors.primary]
+background = "#1e3050"
+foreground = "#dddac0"
+
+[colors.cursor]
+text = "#1e3050"
+cursor = "#dddac0"
+
+[colors.normal]
+black = "#263852"
+red = "#d47060"
+green = "#6bad5a"
+yellow = "#dbb06a"
+blue = "#5a9dd4"
+magenta = "#c080c0"
+cyan = "#4fc0c0"
+white = "#b8b0a0"
+
+[colors.bright]
+black = "#3a4c66"
+red = "#e88070"
+green = "#7dc46a"
+yellow = "#e8c07a"
+blue = "#6ab0e8"
+magenta = "#d499d4"
+cyan = "#60dada"
+white = "#dddac0"

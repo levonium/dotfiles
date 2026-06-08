@@ -1,0 +1,29 @@
+# Pickle Green - forest
+
+[colors.primary]
+background = "#2d4a35"
+foreground = "#f2f0e8"
+
+[colors.cursor]
+text = "#2d4a35"
+cursor = "#f2f0e8"
+
+[colors.normal]
+black = "#1e3325"
+red = "#d47060"
+green = "#4db85a"
+yellow = "#e0b860"
+blue = "#d68a3a"
+magenta = "#c080c0"
+cyan = "#3dc0c0"
+white = "#c8c8b8"
+
+[colors.bright]
+black = "#355a42"
+red = "#e88070"
+green = "#60d06d"
+yellow = "#f0c870"
+blue = "#eca858"
+magenta = "#d499d4"
+cyan = "#50dada"
+white = "#f2f0e8"

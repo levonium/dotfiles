@@ -1,5 +1,5 @@
 import = [
-    "~/.config/alacritty/themes/dayfox.toml"
+    "~/.config/alacritty/themes/afflabio-light.toml"
 ]
 
 [window]

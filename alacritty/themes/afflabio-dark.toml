@@ -1,0 +1,33 @@
+# Afflabio Dark
+
+[colors.primary]
+background = "#0c0c0c"
+foreground = "#f4f1ec"
+
+[colors.cursor]
+text = "#0c0c0c"
+cursor = "#f4f1ec"
+
+[colors.normal]
+black = "#1c1c1c"
+red = "#db3f5a"
+green = "#2d5f4f"
+yellow = "#f2c55f"
+blue = "#5e7ea0"
+magenta = "#a07090"
+cyan = "#60a090"
+white = "#ebe5d8"
+
+[colors.bright]
+black = "#3a3a3a"
+red = "#e85a6a"
+green = "#3a7a5f"
+yellow = "#f7d078"
+blue = "#7a9aba"
+magenta = "#b890a8"
+cyan = "#78b8a0"
+white = "#fefcf7"
+
+[colors.selection]
+background = "#2a2a2a"
+foreground = "#f4f1ec"

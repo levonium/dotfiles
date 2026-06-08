@@ -1,0 +1,29 @@
+# Pickle Red - deep crimson
+
+[colors.primary]
+background = "#3d1a1a"
+foreground = "#f0e6cc"
+
+[colors.cursor]
+text = "#3d1a1a"
+cursor = "#f0e6cc"
+
+[colors.normal]
+black = "#3d2424"
+red = "#d46050"
+green = "#5ab85a"
+yellow = "#e8b860"
+blue = "#5a9dd4"
+magenta = "#c080c0"
+cyan = "#4fc0c0"
+white = "#c0b8a8"
+
+[colors.bright]
+black = "#503434"
+red = "#e87868"
+green = "#6dd06d"
+yellow = "#f0c870"
+blue = "#6ab0e8"
+magenta = "#d499d4"
+cyan = "#60dada"
+white = "#f0e6cc"
