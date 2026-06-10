@@ -3,9 +3,9 @@
 MEDIA_KEYS="org.gnome.settings-daemon.plugins.media-keys"
 CUSTOM_KB="$MEDIA_KEYS.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings"
 
-# wezterm -> Super+Enter
-gsettings set $CUSTOM_KB/custom0/ name "Wezterm"
-gsettings set $CUSTOM_KB/custom0/ command "wezterm"
+# gnome-terminal -> Super+Enter
+gsettings set $CUSTOM_KB/custom0/ name "GNOME Terminal"
+gsettings set $CUSTOM_KB/custom0/ command "gnome-terminal"
 gsettings set $CUSTOM_KB/custom0/ binding "<Super>Return"
 
 # librewolf -> Super+L
@@ -23,9 +23,9 @@ gsettings set $CUSTOM_KB/custom3/ name "Chromium"
 gsettings set $CUSTOM_KB/custom3/ command "flatpak run org.chromium.Chromium"
 gsettings set $CUSTOM_KB/custom3/ binding "<Super>c"
 
-# gnome-terminal -> Super+T
-gsettings set $CUSTOM_KB/custom4/ name "GNOME Terminal"
-gsettings set $CUSTOM_KB/custom4/ command "gnome-terminal"
+# alacritty -> Super+T
+gsettings set $CUSTOM_KB/custom4/ name "Alacritty"
+gsettings set $CUSTOM_KB/custom4/ command "alacritty"
 gsettings set $CUSTOM_KB/custom4/ binding "<Super>t"
 
 # applications dir -> CTRL+SHIFT+A
