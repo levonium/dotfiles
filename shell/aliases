@@ -38,10 +38,6 @@ alias t="php artisan tinker"
 alias at="php artisan test"
 alias atp="php artisan test --parallel"
 
-alias mig="php artisan migrate"
-alias migf="php artisan migrate:fresh"
-alias migfs="php artisan migrate:fresh --seed"
-
 alias pint="./vendor/bin/pint"
 alias dump="composer dumpautoload"
 
@@ -73,16 +69,15 @@ alias o="xdg-open "
 alias ".."="cd .."
 alias z="cd -"
 alias ":q"="exit"
+alias ":wq"="exit"
 
 
 #### project-specific
 alias "alias:create"="cd ~/code/projects/addy-io-cli/ && a alias:create"
 alias "alias:list"="cd ~/code/projects/addy-io-cli/ && a alias:list"
 
-alias aichat="cd ~/code/ai/llama-chat/ && a llama:chat"
-alias aiask="cd ~/code/ai/llama-chat/ && a llama:ask"
-
 alias untar='tar -xzvf'
+alias findText='grep -rwn ./ -e'
 
 #### other aliases
 [ -f ~/.tmux/tmuxaliases ] && source ~/.tmux/tmuxaliases
