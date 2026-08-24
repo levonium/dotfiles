@@ -1,12 +1,6 @@
 #### please please please
 alias please='sudo $(history -p !!)'
 
-#### today's todos
-alias today="cat ~/Documents/zucchini/today.md"
-alias tasks="today"
-alias todo="today"
-
-
 #### git aliases
 alias ga="git add -A"
 alias gc="git commit -m"
@@ -78,6 +72,8 @@ alias "alias:list"="cd ~/code/projects/addy-io-cli/ && a alias:list"
 
 alias untar='tar -xzvf'
 alias findText='grep -rwn ./ -e'
+alias countFiles='find . -type f | wc -l'
+alias countFilesInDirs='for d in */; do echo "$(find "$d" -type f | wc -l) $d"; done | sort -nr'
 
 #### other aliases
 [ -f ~/.tmux/tmuxaliases ] && source ~/.tmux/tmuxaliases
