@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+# Swap left Ctrl and left Alt.
+# Same GSettings key + XKB option name on Ubuntu 24.04 and 26.04 (GNOME).
+SCHEMA="org.gnome.desktop.input-sources"
+KEY="xkb-options"
+OPTION="ctrl:swap_lalt_lctl"
+
+CURRENT="$(gsettings get $SCHEMA $KEY)"
+
+if [[ "$CURRENT" != *"$OPTION"* ]]; then
+  if [[ "$CURRENT" == "@as []" || "$CURRENT" == "[]" ]]; then
+    NEW="['$OPTION']"
+  else
+    NEW="${CURRENT%]*}, '$OPTION']"
+  fi
+  gsettings set $SCHEMA $KEY "$NEW"
+fi

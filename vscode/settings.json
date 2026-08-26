@@ -1,16 +1,18 @@
 {
-  // editor font
+  // ## COLOR THEME:
+  "workbench.colorTheme": "Light 2026",
+  // ## EDITOR: FONT
   "editor.fontFamily": "'JetBrains Mono', 'monospace', monospace",
   "editor.fontLigatures": true,
   "editor.fontSize": 18,
   "editor.fontWeight": "200",
   "editor.lineHeight": 42,
   "editor.letterSpacing": 0.4,
-  // editor: cursor
+  // ## EDITOR: CURSOR
   "editor.cursorStyle": "line",
   "editor.cursorBlinking": "smooth",
   "editor.multiCursorModifier": "alt",
-  // editor: other
+  // ## EDITOR: OTHER
   "editor.tabSize": 2,
   "editor.insertSpaces": true,
   "editor.snippetSuggestions": "top",
@@ -22,22 +24,22 @@
   "editor.formatOnSave": true,
   "editor.inlineSuggest.enabled": true,
   "editor.unicodeHighlight.invisibleCharacters": false,
-  // other
+  // ## WINDOW
   "diffEditor.ignoreTrimWhitespace": false,
   "breadcrumbs.enabled": true,
   "window.openFilesInNewWindow": "on",
   "window.menuBarVisibility": "toggle",
-  // workbench
+  // ## WORKBENCH
   "workbench.startupEditor": "newUntitledFile",
   "workbench.sideBar.location": "right",
   "workbench.editor.showIcons": false,
   "workbench.editor.showTabs": "none",
   "workbench.iconTheme": null,
   "workbench.activityBar.location": "hidden",
-  // explorer
+  // ## EXPLORER
   "explorer.decorations.badges": false,
   "explorer.openEditors.visible": 1,
-  // files
+  // ## FILES
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,
   "files.associations": {
@@ -108,27 +110,15 @@
     "tablrr",
   ],
   "terminal.integrated.tabs.enabled": false,
-  "github.copilot.nextEditSuggestions.enabled": false,
   "git.blame.editorDecoration.enabled": true,
-  "github.copilot.advanced": {
-    "authPermissions": "minimal",
-  },
   "workbench.editorAssociations": {
     "*.copilotmd": "vscode.markdown.preview.editor",
     "*.svg": "default",
-  },
-  "github.copilot.enable": {
-    "*": false,
-    "plaintext": false,
-    "markdown": false,
-    "scminput": false,
   },
   "terminal.integrated.suggest.upArrowNavigatesHistory": false,
   "accessibility.dimUnfocused.enabled": true,
   "terminal.integrated.stickyScroll.enabled": false,
   "claudeCode.preferredLocation": "sidebar",
-  "geminicodeassist.project": "yielding-autonomy-w3mxt",
-  "claudeCode.selectedModel": "sonnet",
   "[astro]": {
     "editor.defaultFormatter": "astro-build.astro-vscode",
   },
@@ -136,22 +126,7 @@
   "[mdx]": {
     "editor.defaultFormatter": "unifiedjs.vscode-mdx",
   },
-  "workbench.colorTheme": "Light 2026",
   "markdown-pdf.displayHeaderFooter": false,
   "markdown-pdf.breaks": true,
-
-  // "emeraldwalk.runonsave": {
-  //   "commands": [
-  //     {
-  //       "match": "\\.php$",
-  //       "cmd": "./vendor/bin/pint ${file}"
-  //     }
-  //   ]
-  // }
-
-  // "workbench.editorAssociations": {
-  //   "*.svg": "default"
-  // }
-
   "markdown-pdf.includeDefaultStyles": false,
 }

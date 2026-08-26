@@ -2,23 +2,7 @@
 
 DOTFILES=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
 
-# --- tmux
-
-source $DOTFILES/tmux/install
-
-# --- kitty
-
-rm -rf $HOME/.config/kitty
-ln -s $DOTFILES/kitty $HOME/.config/kitty
-
-# --- wezterm
-
-rm -rf $HOME/.wezterm.lua
-ln -s $DOTFILES/wezterm/wezterm.lua $HOME/.wezterm.lua
-
-
 # --- alacritty
-
 
 rm -rf $HOME/.config/alacritty
 ln -s $DOTFILES/alacritty $HOME/.config/alacritty
@@ -28,16 +12,17 @@ ln -s $DOTFILES/alacritty $HOME/.config/alacritty
 rm -rf $HOME/.config/nvim
 ln -s $DOTFILES/nvim $HOME/.config/nvim
 
-# --- zed
+# --- vscode
 
-rm -rf $HOME/.config/zed
-ln -s $DOTFILES/zed $HOME/.config/zed
+mkdir -p $HOME/.config/Code/User
+rm -f $HOME/.config/Code/User/settings.json
+rm -f $HOME/.config/Code/User/keybindings.json
+ln -s $DOTFILES/vscode/settings.json $HOME/.config/Code/User/settings.json
+ln -s $DOTFILES/vscode/keybindings.json $HOME/.config/Code/User/keybindings.json
 
-# --- zellij
-
-rm -rf $HOME/.config/zellij
-mkdir $HOME/.config/zellij
-ln -s $DOTFILES/zellij/congig.kdl $HOME/.config/zellij/config.kdl
+if command -v code >/dev/null; then
+  xargs -L1 code --install-extension < $DOTFILES/vscode/extensions.txt
+fi
 
 # --- ./shell
 
@@ -48,12 +33,13 @@ ln -s $DOTFILES/shell/aliases $HOME/.shell/aliases
 ln -sf $HOME/.shell/aliases $HOME/.bash_aliases
 
 ln -s $DOTFILES/shell/prompt.sh $HOME/.shell/prompt
-PROMTLINE='[ -f "$HOME/.prompt" ] && source "$HOME/.prompt"'
+PROMTLINE='[ -f "$HOME/.shell/prompt" ] && source "$HOME/.shell/prompt"'
 grep -qxF "$PROMTLINE" "$HOME/.bashrc" || echo "$PROMTLINE" >> "$HOME/.bashrc"
 
 cp $DOTFILES/shell/workspace-indicators.css $HOME/workspace-indicators.css
 
 source $DOTFILES/shell/keybindings
+source $DOTFILES/shell/xkb-options
 
 # --- ./scripts
 
@@ -64,10 +50,33 @@ for script in "$DOTFILES"/scripts/*; do
   ln -sf "$script" "$HOME/.local/bin/$(basename "$script")"
 done
 
-#--- $PATH
+# --- $PATH
 
 if ! echo "$PATH" | grep -q "$HOME/.local/bin"; then
   echo 'export PATH="$HOME/.local/bin:$PATH"' >> "$HOME/.bashrc"
 fi
 
 [ -f ~/.bashrc ] && source ~/.bashrc
+
+
+# --- not used any longer, for now
+
+# --- tmux
+## source $DOTFILES/tmux/install
+
+# --- kitty
+## rm -rf $HOME/.config/kitty
+## ln -s $DOTFILES/kitty $HOME/.config/kitty
+
+# --- wezterm
+## rm -rf $HOME/.wezterm.lua
+## ln -s $DOTFILES/wezterm/wezterm.lua $HOME/.wezterm.lua
+
+# --- zed
+## rm -rf $HOME/.config/zed
+## ln -s $DOTFILES/zed $HOME/.config/zed
+
+# --- zellij
+## rm -rf $HOME/.config/zellij
+## mkdir $HOME/.config/zellij
+## ln -s $DOTFILES/zellij/congig.kdl $HOME/.config/zellij/config.kdl

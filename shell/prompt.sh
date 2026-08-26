@@ -12,12 +12,12 @@ git_prompt() {
   local st
   st="$(git status --porcelain 2>/dev/null)"
 
-  # flags: + staged, * modified (unstaged), % untracked
+  # flags: + staged, * modified/deleted (unstaged), % untracked
   local f_staged f_mod f_untracked
   [ -n "$st" ] && {
-    echo "$st" | grep -qE '^M|^A|^R|^C'     && f_staged='+'
-    echo "$st" | grep -qE '^\..M|^..M|^ M'  && f_mod='*'
-    echo "$st" | grep -qE '^\?\?'           && f_untracked='%'
+    echo "$st" | grep -qE '^[MADRC]' && f_staged='+'
+    echo "$st" | grep -qE '^.[MD]'   && f_mod='*'
+    echo "$st" | grep -qE '^\?\?'   && f_untracked='%'
   }
 
   printf '🔀 [%s%s%s%s] ' "$ref" "${f_staged}" "${f_mod}" "${f_untracked}"

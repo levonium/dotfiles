@@ -3,9 +3,9 @@
 MEDIA_KEYS="org.gnome.settings-daemon.plugins.media-keys"
 CUSTOM_KB="$MEDIA_KEYS.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings"
 
-# gnome-terminal -> Super+Enter
-gsettings set $CUSTOM_KB/custom0/ name "GNOME Terminal"
-gsettings set $CUSTOM_KB/custom0/ command "gnome-terminal"
+# ptyxis -> Super+Enter
+gsettings set $CUSTOM_KB/custom0/ name "Ptyxis"
+gsettings set $CUSTOM_KB/custom0/ command "ptyxis"
 gsettings set $CUSTOM_KB/custom0/ binding "<Super>Return"
 
 # librewolf -> Super+L

@@ -51,6 +51,10 @@ alias jnjel="trash-put"
 #### go on, do what you need to do
 alias goon="sudo apt update && sudo apt upgrade -y"
 
+#### one-time boot into the linux-surface kernel (check `uname -a` after upgrades,
+#### version string here may drift and need updating)
+alias boot-surface='sudo grub-reboot "Advanced options for Ubuntu>Ubuntu, with Linux 6.19.8-surface-3" && sudo reboot'
+
 
 #### editors
 alias vim=nvim
