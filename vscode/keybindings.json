@@ -1,0 +1,92 @@
+// Place your key bindings in this file to override the defaults
+[
+  // Sidebar views.
+  {
+    "key": "ctrl+k ctrl+e",
+    "command": "workbench.view.explorer"
+  },
+  {
+    "key": "ctrl+k ctrl+v",
+    "command": "workbench.view.scm"
+  },
+  {
+    "key": "ctrl+k ctrl+d",
+    "command": "workbench.view.debug"
+  },
+  {
+    "key": "ctrl+k ctrl+x",
+    "command": "workbench.extensions.action.showInstalledExtensions"
+  },
+  // Split views.
+  {
+    "key": "alt+shift+i",
+    "command": "workbench.action.increaseViewSize"
+  },
+  {
+    "key": "alt+shift+d",
+    "command": "workbench.action.decreaseViewSize"
+  },
+  {
+    "key": "alt+h",
+    "command": "workbench.action.navigateLeft"
+  },
+  {
+    "key": "alt+l",
+    "command": "workbench.action.navigateRight"
+  },
+  // Better PHPUnit. # better-phpunit extension is required.
+  {
+    "key": "ctrl+k ctrl+r",
+    "command": "better-phpunit.run",
+    "when": "editorLangId == 'php'"
+  },
+  {
+    "key": "ctrl+k ctrl+f",
+    "command": "better-phpunit.run-file",
+    "when": "editorLangId == 'php'"
+  },
+  {
+    "key": "ctrl+k ctrl+p",
+    "command": "better-phpunit.run-previous",
+    "when": "editorLangId == 'php'"
+  },
+  // Other
+  {
+    "key": "ctrl+shift+d",
+    "command": "editor.action.duplicateSelection"
+  },
+  {
+    "key": "ctrl+enter",
+    "command": "-chatEditor.action.accept",
+    "when": "chat.hasEditorModifications && editorFocus && hasUndecidedChatEditingResource && !chat.ctxHasRequestInProgress || chat.hasNotebookEditorModifications && editorFocus && hasUndecidedChatEditingResource && !chat.ctxHasRequestInProgress"
+  },
+  {
+    "key": "ctrl+enter",
+    "command": "-workbench.action.chat.applyInEditor",
+    "when": "accessibleViewInCodeBlock && chatIsEnabled || chatIsEnabled && inChat && !inChatInput"
+  },
+  {
+    "key": "ctrl+enter",
+    "command": "-inlineChat.acceptChanges",
+    "when": "inlineChatHasProvider && inlineChatVisible && !inlineChatDocumentChanged || inlineChatHasProvider && inlineChatVisible && config.inlineChat.mode != 'preview'"
+  },
+  {
+    "key": "ctrl+enter",
+    "command": "-workbench.action.terminal.chat.runCommand",
+    "when": "terminalChatResponseContainsCodeBlock && terminalHasBeenCreated && !terminalChatActiveRequest && !terminalChatResponseContainsMultipleCodeBlocks || terminalChatResponseContainsCodeBlock && terminalProcessSupported && !terminalChatActiveRequest && !terminalChatResponseContainsMultipleCodeBlocks"
+  },
+  {
+    "key": "ctrl+enter",
+    "command": "-workbench.action.terminal.chat.runFirstCommand",
+    "when": "terminalChatResponseContainsMultipleCodeBlocks && terminalHasBeenCreated && !terminalChatActiveRequest || terminalChatResponseContainsMultipleCodeBlocks && terminalProcessSupported && !terminalChatActiveRequest"
+  },
+  {
+    "key": "ctrl+enter",
+    "command": "-notebook.cell.insertCodeCellBelow",
+    "when": "notebookCellListFocused && !inputFocus && notebookChatOuterFocusPosition == ''"
+  },
+  {
+    "key": "ctrl+k ctrl+left",
+    "command": "workbench.files.action.collapseExplorerFolders"
+  }
+]

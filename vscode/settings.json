@@ -1,0 +1,157 @@
+{
+  // editor font
+  "editor.fontFamily": "'JetBrains Mono', 'monospace', monospace",
+  "editor.fontLigatures": true,
+  "editor.fontSize": 18,
+  "editor.fontWeight": "200",
+  "editor.lineHeight": 42,
+  "editor.letterSpacing": 0.4,
+  // editor: cursor
+  "editor.cursorStyle": "line",
+  "editor.cursorBlinking": "smooth",
+  "editor.multiCursorModifier": "alt",
+  // editor: other
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.snippetSuggestions": "top",
+  "editor.renderWhitespace": "selection",
+  "editor.minimap.enabled": false,
+  "editor.showFoldingControls": "mouseover",
+  "editor.formatOnPaste": false,
+  "editor.formatOnType": false,
+  "editor.formatOnSave": true,
+  "editor.inlineSuggest.enabled": true,
+  "editor.unicodeHighlight.invisibleCharacters": false,
+  // other
+  "diffEditor.ignoreTrimWhitespace": false,
+  "breadcrumbs.enabled": true,
+  "window.openFilesInNewWindow": "on",
+  "window.menuBarVisibility": "toggle",
+  // workbench
+  "workbench.startupEditor": "newUntitledFile",
+  "workbench.sideBar.location": "right",
+  "workbench.editor.showIcons": false,
+  "workbench.editor.showTabs": "none",
+  "workbench.iconTheme": null,
+  "workbench.activityBar.location": "hidden",
+  // explorer
+  "explorer.decorations.badges": false,
+  "explorer.openEditors.visible": 1,
+  // files
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+  "files.associations": {
+    "*.scss": "scss",
+    "*.svg": "html",
+    "*.vue": "vue",
+    "*.html": "html",
+  },
+  "[javascript]": {
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2,
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+  },
+  "js/ts.updateImportsOnFileMove.enabled": "always",
+  "[css]": {
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+  },
+  "css.validate": false,
+  "scss.validate": false,
+  "[scss]": {
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+  },
+  "tailwindCSS.emmetCompletions": true,
+  "[php]": {
+    "editor.insertSpaces": true,
+    "editor.tabSize": 4,
+    "editor.defaultFormatter": "junstyle.php-cs-fixer",
+  },
+  "php-cs-fixer.config": ".php-cs-fixer.php;/home/levon/code/php-cs-fixer.php",
+  "php-cs-fixer.executablePath": "${extensionPath}/php-cs-fixer.phar",
+  "php-cs-fixer.formatHtml": true,
+  "php-cs-fixer.onsave": true,
+  "php-cs-fixer.lastDownload": 1787454433250,
+  "[blade]": {
+    "editor.autoClosingBrackets": "always",
+    "editor.insertSpaces": true,
+    "editor.tabSize": 4,
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+  },
+  "[html]": {
+    "editor.insertSpaces": true,
+    "editor.tabSize": 4,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+  },
+  "[json]": {
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+  },
+  "[python]": {
+    "editor.insertSpaces": true,
+    "editor.tabSize": 4,
+  },
+  "debug.disassemblyView.showSourceCode": false,
+  "cSpell.userWords": [
+    "Akurai",
+    "DinoMatic",
+    "FXT",
+    "Kemoku",
+    "Sikika",
+    "Spinoko",
+    "tablrr",
+  ],
+  "terminal.integrated.tabs.enabled": false,
+  "github.copilot.nextEditSuggestions.enabled": false,
+  "git.blame.editorDecoration.enabled": true,
+  "github.copilot.advanced": {
+    "authPermissions": "minimal",
+  },
+  "workbench.editorAssociations": {
+    "*.copilotmd": "vscode.markdown.preview.editor",
+    "*.svg": "default",
+  },
+  "github.copilot.enable": {
+    "*": false,
+    "plaintext": false,
+    "markdown": false,
+    "scminput": false,
+  },
+  "terminal.integrated.suggest.upArrowNavigatesHistory": false,
+  "accessibility.dimUnfocused.enabled": true,
+  "terminal.integrated.stickyScroll.enabled": false,
+  "claudeCode.preferredLocation": "sidebar",
+  "geminicodeassist.project": "yielding-autonomy-w3mxt",
+  "claudeCode.selectedModel": "sonnet",
+  "[astro]": {
+    "editor.defaultFormatter": "astro-build.astro-vscode",
+  },
+  "chat.disableAIFeatures": true,
+  "[mdx]": {
+    "editor.defaultFormatter": "unifiedjs.vscode-mdx",
+  },
+  "workbench.colorTheme": "Light 2026",
+  "markdown-pdf.displayHeaderFooter": false,
+  "markdown-pdf.breaks": true,
+
+  // "emeraldwalk.runonsave": {
+  //   "commands": [
+  //     {
+  //       "match": "\\.php$",
+  //       "cmd": "./vendor/bin/pint ${file}"
+  //     }
+  //   ]
+  // }
+
+  // "workbench.editorAssociations": {
+  //   "*.svg": "default"
+  // }
+
+  "markdown-pdf.includeDefaultStyles": false,
+}
